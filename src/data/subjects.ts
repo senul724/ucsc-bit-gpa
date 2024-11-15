@@ -59,45 +59,45 @@ export const subjects:Record<string, Semesters> = {
 
 export const initialValues = {
   sem1:{
-    '1':'Not Sit',
-    '2':'Not Sit',
-    '3':'Not Sit',
-    '4':'Not Sit',
-    '5':'Not Sit'
+    '1':'Did Not Sit',
+    '2':'Did Not Sit',
+    '3':'Did Not Sit',
+    '4':'Did Not Sit',
+    '5':'Did Not Sit'
   },
   sem2:{
-    '1':'Not Sit',
-    '2':'Not Sit',
-    '3':'Not Sit',
-    '4':'Not Sit',
-    '5':'Not Sit'
+    '1':'Did Not Sit',
+    '2':'Did Not Sit',
+    '3':'Did Not Sit',
+    '4':'Did Not Sit',
+    '5':'Did Not Sit'
   },
   sem3:{
-    '1':'Not Sit',
-    '2':'Not Sit',
-    '3':'Not Sit',
-    '4':'Not Sit',
-    '5':'Not Sit'
+    '1':'Did Not Sit',
+    '2':'Did Not Sit',
+    '3':'Did Not Sit',
+    '4':'Did Not Sit',
+    '5':'Did Not Sit'
   },
   sem4:{
-    '1':'Not Sit',
-    '2':'Not Sit',
-    '3':'Not Sit',
-    '4':'Not Sit',
-    '5':'Not Sit'
+    '1':'Did Not Sit',
+    '2':'Did Not Sit',
+    '3':'Did Not Sit',
+    '4':'Did Not Sit',
+    '5':'Did Not Sit'
   },
   sem5:{
-    '1':'Not Sit',
-    '2':'Not Sit',
-    '3':'Not Sit',
-    '4':'Not Sit',
-    '5':'Not Sit'
+    '1':'Did Not Sit',
+    '2':'Did Not Sit',
+    '3':'Did Not Sit',
+    '4':'Did Not Sit',
+    '5':'Did Not Sit'
   },
   sem6:{
-    '1':'Not Sit',
-    '2':'Not Sit',
-    '3':'Not Sit',
-    '4':'Not Sit',
-    '5':'Not Sit'
+    '1':'Did Not Sit',
+    '2':'Did Not Sit',
+    '3':'Did Not Sit',
+    '4':'Did Not Sit',
+    '5':'Did Not Sit'
   },
 }

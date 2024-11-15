@@ -13,11 +13,6 @@ import { Field, Form, Formik } from "formik";
 export default function Component() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const calculateGPA = () => {
-
-    setIsModalOpen(true)
-  }
-
   const getResultReview = (gpa: number) => {
     if (gpa >= 3.7) return "Excellent performance! Keep up the great work!"
     if (gpa >= 3.0) return "Good job! You're doing well, but there's room for improvement."
@@ -74,13 +69,13 @@ export default function Component() {
                             id={`${year}-${semester}-${subject.name}`}
                             className="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                           >
-                            <option value="Not Sit">Not Sit</option>
+                            <option value="Did Not Sit">Did Not Sit</option>
                             {subject.isNonGPA ? (
                               ['PASS', 'FAIL'].map(grade => (
                                 <option key={grade} value={grade}>{grade}</option>
                               ))
                             ) : (
-                              Object.keys(gradePoints).filter(grade => grade !== 'Not Sit').map(grade => (
+                              Object.keys(gradePoints).filter(grade => grade !== 'Did Not Sit').map(grade => (
                                 <option key={grade} value={grade}>{grade}</option>
                               ))
                             )}
