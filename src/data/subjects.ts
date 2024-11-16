@@ -101,3 +101,5 @@ export const initialValues = {
     '5':'Did Not Sit'
   },
 }
+
+export type InitialValues = typeof initialValues
