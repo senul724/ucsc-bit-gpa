@@ -5,19 +5,38 @@ import { FaCalculator, FaGraduationCap, FaBook, FaCalendarAlt, FaTimes } from 'r
 import Image from 'next/image'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { initialValues, subjects } from '@/data/subjects'
-import { gradePoints } from '@/data/grades'
+import { InitialValues, initialValues, subjects } from '@/data/subjects'
+import { gpaGrades, nonGPAGrades } from '@/data/grades'
 import { Field, Form, Formik } from "formik";
 
 
 export default function Component() {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const getResultReview = (gpa: number) => {
-    if (gpa >= 3.7) return "Excellent performance! Keep up the great work!"
-    if (gpa >= 3.0) return "Good job! You're doing well, but there's room for improvement."
-    if (gpa >= 2.0) return "You're meeting the minimum requirements, but consider seeking additional support to improve your grades."
-    return "Your current GPA is below the minimum requirement. Please seek academic advice as soon as possible."
+  // const getResultReview = (gpa: number) => {
+  //   if (gpa >= 3.7) return "Excellent performance! Keep up the great work!"
+  //   if (gpa >= 3.0) return "Good job! You're doing well, but there's room for improvement."
+  //   if (gpa >= 2.0) return "You're meeting the minimum requirements, but consider seeking additional support to improve your grades."
+  //   return "Your current GPA is below the minimum requirement. Please seek academic advice as soon as possible."
+  // }
+
+  const onSubmit = (values: InitialValues) => {
+    console.log(values);
+    Object.entries(values).forEach(([sem, subs]) => {
+      let broke = false
+      Object.entries(subs).forEach(([_, grade]) => {
+        if (grade !== "Did Not Sit") {
+          console.log(sem, "true", _)
+          broke = true
+          return;
+        }
+      })
+      if (!broke) {
+        console.log(sem, "false")
+      }
+    })
+    setIsModalOpen(true)
+
   }
   return (
     <div className="min-h-screen bg-white py-8 px-4">
@@ -41,10 +60,7 @@ export default function Component() {
 
         <Formik
           initialValues={initialValues}
-          onSubmit={(values) => {
-            console.log(values)
-            setIsModalOpen(true)
-          }}
+          onSubmit={onSubmit}
         >
           <Form>
             <div className="grid md:grid-cols-3 gap-8">
@@ -56,7 +72,7 @@ export default function Component() {
                   {Object.entries(semesters).map(([semester, subjectList], semesterIndex) => (
                     <div key={semester} className="bg-white p-6 rounded-lg shadow-md border border-yellow-300">
                       <h3 className="text-xl font-medium mb-4 text-yellow-600 flex items-center">
-                        <FaCalendarAlt className="mr-2" /> Semester {semesterIndex + 1}
+                        <FaCalendarAlt className="mr-2" /> Semester {semesterIndex + (yearIndex * 2) + 1}
                       </h3>
                       {subjectList.map((subject) => (
                         <div key={subject.name} className="mb-4 last:mb-0">
@@ -69,13 +85,12 @@ export default function Component() {
                             id={`${year}-${semester}-${subject.name}`}
                             className="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                           >
-                            <option value="Did Not Sit">Did Not Sit</option>
                             {subject.isNonGPA ? (
-                              ['PASS', 'FAIL'].map(grade => (
+                              nonGPAGrades.map(grade => (
                                 <option key={grade} value={grade}>{grade}</option>
                               ))
                             ) : (
-                              Object.keys(gradePoints).filter(grade => grade !== 'Did Not Sit').map(grade => (
+                              gpaGrades.map(grade => (
                                 <option key={grade} value={grade}>{grade}</option>
                               ))
                             )}
@@ -169,7 +184,7 @@ const ResultModal = ({ isModalOpen, closeModal }: { isModalOpen: boolean; closeM
                   </div>
                   <div>
                     <h4 className="font-semibold mb-2">Result Review:</h4>
-                    <p>You're meeting the minimum requirements, but consider seeking additional support to improve your grades.</p>
+                    <p>You are meeting the minimum requirements, but consider seeking additional support to improve your grades.</p>
                   </div>
                   <div className="bg-yellow-100 p-4 rounded-lg">
                     <p className="text-sm">
