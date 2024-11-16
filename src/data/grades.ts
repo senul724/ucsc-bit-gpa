@@ -1,6 +1,9 @@
 export type Grade = 'Did Not Sit' | 'A+' | 'A' | 'A-' | 'B+' | 'B' | 'B-' | 'C+' | 'C' | 'C-' | 'D+' | 'D' | 'D-' | 'E'
 export type NonGPAGrade = 'Did Not Sit' | 'PASS' | 'FAIL'
 
+export const gpaGrades = ['Did Not Sit' , 'A+' , 'A' , 'A-' , 'B+' , 'B' , 'B-' , 'C+' , 'C' , 'C-' , 'D+' , 'D' , 'D-' , 'E'] 
+export const nonGPAGrades = ['Did Not Sit' , 'PASS' , 'FAIL']
+
 export const gradePoints: Record<Grade, number> = {
   'A+': 4.0, 'A': 4.0, 'A-': 3.7,
   'B+': 3.3, 'B': 3.0, 'B-': 2.7,
