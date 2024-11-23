@@ -3,15 +3,16 @@
 import React, { useState } from 'react'
 import { FaCalculator, FaGraduationCap, FaBook, FaCalendarAlt, FaTimes } from 'react-icons/fa'
 import Image from 'next/image'
-import { Dialog, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
-import { InitialValues, initialValues, subjects } from '@/data/subjects'
+import { InitialValues, initialValues, semYear, subjects } from '@/data/subjects'
 import { gpaGrades, nonGPAGrades } from '@/data/grades'
 import { Field, Form, Formik } from "formik";
+import { calculateSemGpa, SemSummary } from '@/data/utils/gpa'
+import ResultModal from '@/components/resultModal'
 
 
 export default function Component() {
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [result, setResult] = useState<{ [year: number]: { [sem: string]: SemSummary } }|null>(null) 
 
   // const getResultReview = (gpa: number) => {
   //   if (gpa >= 3.7) return "Excellent performance! Keep up the great work!"
@@ -21,22 +22,36 @@ export default function Component() {
   // }
 
   const onSubmit = (values: InitialValues) => {
-    console.log(values);
-    Object.entries(values).forEach(([sem, subs]) => {
-      let broke = false
-      Object.entries(subs).forEach(([_, grade]) => {
-        if (grade !== "Did Not Sit") {
-          console.log(sem, "true", _)
-          broke = true
-          return;
+    try{
+    let val: { [year: number]: { [sem: string]: SemSummary } }={};
+
+    {
+      // to get the semesters entered by the user
+      Object.entries(values).forEach(([sem, subs]) => {
+        const year = semYear[sem]
+        let filled = false
+
+        Object.entries(subs).forEach(([_, grade]) => {
+          if (grade !== "Did Not Sit") {
+            filled = true
+            return;
+          }
+        })
+        if (filled) {
+          if(!val[year]){
+            val[year] = {}
+          }
+          val[year][sem] = calculateSemGpa(values[sem])
         }
       })
-      if (!broke) {
-        console.log(sem, "false")
-      }
-    })
-    setIsModalOpen(true)
+      setResult(val)
+    }
 
+    console.log("results summary: ", val)
+    setIsModalOpen(true)
+    }catch(e){
+      console.error(e)
+    }
   }
   return (
     <div className="min-h-screen bg-white py-8 px-4">
@@ -81,16 +96,16 @@ export default function Component() {
                           </label>
                           <Field
                             as="select"
-                            name={`${semester}.${subject.id}`}
+                            name={`${semester}.${subject.code}`}
                             id={`${year}-${semester}-${subject.name}`}
                             className="w-full p-2 border rounded-md bg-white focus:ring-2 focus:ring-yellow-400 focus:border-transparent"
                           >
-                            {subject.isNonGPA ? (
-                              nonGPAGrades.map(grade => (
+                            {subject.isGPA ? (
+                              gpaGrades.map(grade => (
                                 <option key={grade} value={grade}>{grade}</option>
                               ))
                             ) : (
-                              gpaGrades.map(grade => (
+                              nonGPAGrades.map(grade => (
                                 <option key={grade} value={grade}>{grade}</option>
                               ))
                             )}
@@ -111,96 +126,8 @@ export default function Component() {
             </button>
           </Form>
         </Formik>
-        <ResultModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} />
+        <ResultModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} gpaSummary={result}/>
       </div>
     </div>
-  )
-}
-
-const ResultModal = ({ isModalOpen, closeModal }: { isModalOpen: boolean; closeModal: () => void; }) => {
-  return (
-    <Transition appear show={isModalOpen} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={() => { }}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-black bg-opacity-25" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 overflow-y-auto">
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 scale-95"
-              enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95"
-            >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <Dialog.Title
-                  as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900 flex justify-between items-center"
-                >
-                  GPA Results
-                  <button
-                    onClick={closeModal}
-                    className="text-gray-400 hover:text-gray-500 focus:outline-none"
-                  >
-                    <FaTimes />
-                  </button>
-                </Dialog.Title>
-                <div className="mt-2 space-y-4">
-                  <div className="flex justify-between">
-                    <span>Year 1 GPA:</span>
-                    <span className="font-semibold">{0.24}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Year 2 GPA:</span>
-                    <span className="font-semibold">{0.24}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Year 3 GPA:</span>
-                    <span className="font-semibold">{0.24}</span>
-                  </div>
-                  <div className="flex justify-between font-bold text-lg">
-                    <span>Overall GPA:</span>
-                    <span>{1.24}</span>
-                  </div>
-                  <div className="border-t pt-4">
-                    <h4 className="font-semibold mb-2">Minimum Requirements:</h4>
-                    <ul className="list-disc list-inside">
-                      <li>Maintain a GPA of 2.0 or higher</li>
-                      <li>Pass all non-GPA subjects</li>
-                      <li>Complete at least 24 credits per academic year</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Result Review:</h4>
-                    <p>You are meeting the minimum requirements, but consider seeking additional support to improve your grades.</p>
-                  </div>
-                  <div className="bg-yellow-100 p-4 rounded-lg">
-                    <p className="text-sm">
-                      Matrix Institute of Information Technology can help you improve your academic performance through personalized tutoring, study groups, and additional resources.
-                    </p>
-                    <button className="mt-2 bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700 transition-colors" type='button'>
-                      Get Help for Free Now
-                    </button>
-                  </div>
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition>
-
   )
 }
