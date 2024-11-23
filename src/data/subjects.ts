@@ -1,105 +1,117 @@
 type Subject = {
-  id:string;
-  name:string;
-  isNonGPA:boolean;
+  code: string;
+  name: string;
+  isGPA: boolean;
+  credits: number;
 }
 
 type Semesters = Record<string, Subject[]>
 
-export const subjects:Record<string, Semesters> = {
+export const subjects: Record<string, Semesters> = {
   year1: {
     sem1: [
-      { id:"1", name: 'Information Systems & Technology', isNonGPA: false },
-      { id:"2", name: 'Programming', isNonGPA: false },
-      { id:"3", name: 'Computer Systems I', isNonGPA: false },
-      { id:"4", name: 'Personal Computing', isNonGPA: false },
-      { id:"5", name: 'Introductory Mathematics', isNonGPA: true }
+      { code: "EN1106", name: "Introductory Mathematics", credits: 2, isGPA: false },
+      { code: "IT1106", name: "Information Systems", credits: 4, isGPA: true },
+      { code: "IT1206", name: "Computer Systems", credits: 4, isGPA: true },
+      { code: "IT1306", name: "Free and Open Source Software for\nPersonal Computing", credits: 3, isGPA: true },
+      { code: "IT1406", name: "Introduction to Programming", credits: 4, isGPA: true }
     ],
     sem2: [
-      {id:"1", name: 'Database Systems', isNonGPA: false },
-      {id:"2", name: 'Web Application Development I', isNonGPA: false },
-      {id:"3",  name: 'Mathematics for Computing I', isNonGPA: false },
-      {id:"4",  name: 'Software Engineering', isNonGPA: false },
-      {id:"5",  name: 'Communication Skills 1', isNonGPA: true }
-    ]
+      { code: "EN2106", name: "Communication Skills I", credits: 2, isGPA: false },
+      { code: "IT2106", name: "Mathematics for Computing I", credits: 3, isGPA: true },
+      { code: "IT2206", name: "Fundamentals of Software\nEngineering", credits: 4, isGPA: true },
+      { code: "IT2306", name: "Database Systems", credits: 4, isGPA: true },
+      { code: "IT2406", name: "Web Application Development I", credits: 4, isGPA: true }
+    ],
   },
   year2: {
     sem3: [
-      {id:"1", name: 'Data Structures & Algorithms', isNonGPA: false },
-      {id:"2", name: 'Web Application Development II', isNonGPA: false },
-      {id:"3", name: 'Data Management Systems', isNonGPA: false },
-      {id:"4", name: 'Object Oriented Analysis & Design', isNonGPA: false },
-      {id:"5", name: 'Communication Skills 2', isNonGPA: true }
+      { code: "EN3106", name: 'Communication Skills 2', isGPA: false, credits: 2 },
+      { code: "IT3106", name: 'Object Oriented Analysis & Design', isGPA: true, credits: 3 },
+      { code: "IT3206", name: 'Data Structures & Algorithms', isGPA: true, credits: 3 },
+      { code: "IT3306", name: 'Data Management Systems', isGPA: true, credits: 3 },
+      { code: "IT3406", name: 'Web Application Development II', isGPA: true, credits: 4 },
     ],
     sem4: [
-      {id:"1", name: 'Agile Software Development', isNonGPA: false },
-      {id:"2", name: 'Computer Networks', isNonGPA: false },
-      {id:"3", name: 'IT Project Management', isNonGPA: false },
-      {id:"4", name: 'Enterprise Application Development', isNonGPA: false },
-      {id:"5", name: 'User Experience Design', isNonGPA: true }
+      { code: "IT4106", name: 'User Experience Design', isGPA: true, credits: 3 },
+      { code: "IT4206", name: 'Enterprise Application Development', isGPA: true, credits: 4 },
+      { code: "IT4306", name: 'IT Project Management', isGPA: true, credits: 3 },
+      { code: "IT4406", name: 'Agile Software Development', isGPA: true, credits: 4 },
+      { code: "IT4506", name: 'Computer Networks', isGPA: true, credits: 3 },
     ]
   },
   year3: {
     sem5: [
-      {id:"1", name: 'Professional Practice', isNonGPA: false },
-      {id:"2", name: 'Principles of Information Security', isNonGPA: false },
-      {id:"3", name: 'Systems & Network Administration', isNonGPA: false },
-      {id:"4", name: 'e-Business Technologies', isNonGPA: false },
-      {id:"5", name: 'Fundamentals of Management & Entrepreneurship', isNonGPA: true }
+      { code: "EN5106", name: "Fundamentals of\nManagement &\nEntrepreneurship", credits: 2, isGPA: false },
+      { code: "IT5106", name: "Software Development\nProject", credits: 8, isGPA: true },
+      { code: "IT5206", name: "Professional Practice", credits: 3, isGPA: true },
+      { code: "IT5306", name: "Principles of Information\nSecurity", credits: 3, isGPA: true },
+      { code: "IT5406", name: "Systems & Network\nAdministration", credits: 3, isGPA: true },
+      { code: "IT5506", name: "e-Business Technologies", credits: 3, isGPA: true }
     ],
     sem6: [
-      {id:"1", name: 'Software Quality Assurance', isNonGPA: false },
-      {id:"2", name: 'Application Development for Mobile Environments', isNonGPA: false },
-      {id:"3", name: 'Network Security & Audit', isNonGPA: false },
-      {id:"4", name: 'Software Development Project', isNonGPA: false },
-      {id:"5", name: 'Mathematics for Computing II', isNonGPA: true }
+      { code: "EN6106", name: "Advanced Concepts in\nInformation Technology", credits: 2, isGPA: false },
+      { code: "IT6206", name: "Software Quality\nAssurance", credits: 3, isGPA: true },
+      { code: "IT6306", name: "Application Development\nfor Mobile Environments", credits: 4, isGPA: true },
+      { code: "IT6406", name: "Network Security and\nAudit", credits: 3, isGPA: true },
+      { code: "IT6506", name: "Mathematics for\nComputing II", credits: 3, isGPA: true }
     ]
   }
 }
 
 export const initialValues = {
-  sem1:{
-    '1':'Did Not Sit',
-    '2':'Did Not Sit',
-    '3':'Did Not Sit',
-    '4':'Did Not Sit',
-    '5':'Did Not Sit'
+  sem1: {
+    'EN1106': 'Did Not Sit',
+    'IT1106': 'Did Not Sit',
+    'IT1206': 'Did Not Sit',
+    'IT1306': 'Did Not Sit',
+    'IT1406': 'Did Not Sit',
   },
-  sem2:{
-    '1':'Did Not Sit',
-    '2':'Did Not Sit',
-    '3':'Did Not Sit',
-    '4':'Did Not Sit',
-    '5':'Did Not Sit'
+  sem2: {
+    'EN2106': 'Did Not Sit',
+    'IT2106': 'Did Not Sit',
+    'IT2206': 'Did Not Sit',
+    'IT2306': 'Did Not Sit',
+    'IT2406': 'Did Not Sit',
   },
-  sem3:{
-    '1':'Did Not Sit',
-    '2':'Did Not Sit',
-    '3':'Did Not Sit',
-    '4':'Did Not Sit',
-    '5':'Did Not Sit'
+  sem3: {
+    'EN3106': 'Did Not Sit',
+    'IT3106': 'Did Not Sit',
+    'IT3206': 'Did Not Sit',
+    'IT3306': 'Did Not Sit',
+    'IT3406': 'Did Not Sit',
   },
-  sem4:{
-    '1':'Did Not Sit',
-    '2':'Did Not Sit',
-    '3':'Did Not Sit',
-    '4':'Did Not Sit',
-    '5':'Did Not Sit'
+  sem4: {
+    'IT4106': 'Did Not Sit',
+    'IT4206': 'Did Not Sit',
+    'IT4306': 'Did Not Sit',
+    'IT4406': 'Did Not Sit',
+    'IT4506': 'Did Not Sit',
   },
-  sem5:{
-    '1':'Did Not Sit',
-    '2':'Did Not Sit',
-    '3':'Did Not Sit',
-    '4':'Did Not Sit',
-    '5':'Did Not Sit'
+  sem5: {
+    'EN5106': 'Did Not Sit',
+    'IT5106': 'Did Not Sit',
+    'IT5206': 'Did Not Sit',
+    'IT5306': 'Did Not Sit',
+    'IT5406': 'Did Not Sit',
+    'IT5506': 'Did Not Sit',
   },
-  sem6:{
-    '1':'Did Not Sit',
-    '2':'Did Not Sit',
-    '3':'Did Not Sit',
-    '4':'Did Not Sit',
-    '5':'Did Not Sit'
+  sem6: {
+    'EN6106': 'Did Not Sit',
+    'IT6206': 'Did Not Sit',
+    'IT6306': 'Did Not Sit',
+    'IT6406': 'Did Not Sit',
+    'IT6506': 'Did Not Sit',
   },
+}
+
+export const semYear: Record<string, number> = {
+  "sem1": 1,
+  "sem2": 1,
+  "sem3": 2,
+  "sem4": 2,
+  "sem5": 3,
+  "sem6": 3,
 }
 
 export type InitialValues = typeof initialValues
