@@ -43,7 +43,6 @@ export const subjects: Record<string, Semesters> = {
   year3: {
     sem5: [
       { code: "EN5106", name: "Fundamentals of\nManagement &\nEntrepreneurship", credits: 2, isGPA: false },
-      { code: "IT5106", name: "Software Development\nProject", credits: 8, isGPA: true },
       { code: "IT5206", name: "Professional Practice", credits: 3, isGPA: true },
       { code: "IT5306", name: "Principles of Information\nSecurity", credits: 3, isGPA: true },
       { code: "IT5406", name: "Systems & Network\nAdministration", credits: 3, isGPA: true },
@@ -54,7 +53,8 @@ export const subjects: Record<string, Semesters> = {
       { code: "IT6206", name: "Software Quality\nAssurance", credits: 3, isGPA: true },
       { code: "IT6306", name: "Application Development\nfor Mobile Environments", credits: 4, isGPA: true },
       { code: "IT6406", name: "Network Security and\nAudit", credits: 3, isGPA: true },
-      { code: "IT6506", name: "Mathematics for\nComputing II", credits: 3, isGPA: true }
+      { code: "IT6506", name: "Mathematics for\nComputing II", credits: 3, isGPA: true },
+      { code: "IT5106", name: "Software Development\nProject", credits: 8, isGPA: true },
     ]
   }
 }
@@ -115,3 +115,37 @@ export const semYear: Record<string, number> = {
 }
 
 export type InitialValues = typeof initialValues
+
+export const SubjectName: Record<string, string> = {
+ "EN1106": "Introductory Mathematics",
+ "IT1106": "Information Systems",
+ "IT1206": "Computer Systems",
+ "IT1306": "Free and Open Source Software for\nPersonal Computing",
+ "IT1406": "Introduction to Programming",
+ "EN2106": "Communication Skills I",
+ "IT2106": "Mathematics for Computing I",
+ "IT2206": "Fundamentals of Software\nEngineering",
+ "IT2306": "Database Systems",
+ "IT2406": "Web Application Development I",
+ "EN3106": 'Communication Skills 2',
+ "IT3106": 'Object Oriented Analysis & Design',
+ "IT3206": 'Data Structures & Algorithms',
+ "IT3306": 'Data Management Systems',
+ "IT3406": 'Web Application Development II',
+ "IT4106": 'User Experience Design',
+ "IT4206": 'Enterprise Application Development',
+ "IT4306": 'IT Project Management',
+ "IT4406": 'Agile Software Development',
+ "IT4506": 'Computer Networks',
+ "EN5106": "Fundamentals of\nManagement &\nEntrepreneurship",
+ "IT5106": "Software Development\nProject",
+ "IT5206": "Professional Practice",
+ "IT5306": "Principles of Information\nSecurity",
+ "IT5406": "Systems & Network\nAdministration",
+ "IT5506": "e-Business Technologies",
+ "EN6106": "Advanced Concepts in\nInformation Technology",
+ "IT6206": "Software Quality\nAssurance",
+ "IT6306": "Application Development\nfor Mobile Environments",
+ "IT6406": "Network Security and\nAudit",
+ "IT6506": "Mathematics for\nComputing II",
+}
