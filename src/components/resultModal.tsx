@@ -1,6 +1,6 @@
 "use client"
 
-import { SemSummary } from '@/data/utils/gpa'
+import { FullResultSummary } from '@/app/page'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { FaTimes } from 'react-icons/fa'
@@ -12,13 +12,17 @@ export default function ResultModal({
 }: {
   isModalOpen: boolean
   closeModal: () => void
-  gpaSummary: { [year: number]: { [sem: string]: SemSummary } }|null
+  gpaSummary: FullResultSummary|null
 }) {
   if(!gpaSummary){
     return <></>
   }
+
+  const { semsEntered, credits, gpa, summary} = gpaSummary
+  const averageGPA = Number((gpa/semsEntered).toFixed(2))
+
   return (
-    <Transition appear show={isModalOpen} as={Fragment}>
+  <Transition appear show={isModalOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
           as={Fragment}
@@ -56,16 +60,16 @@ export default function ResultModal({
                   <div className="w-2/5 pr-6">
                     <h3 className="text-2xl font-bold text-gray-900 mb-4">GPA Results</h3>
                     <div className="space-y-6">
-                      {Object.entries(gpaSummary).map(([year, semesters]) => (
+                      {Object.entries(summary).map(([year, fullSummary]) => (
                         <div key={year} className="bg-gray-50 p-4 rounded-lg">
                           <div className="flex justify-between items-center mb-2">
                             <span className="font-semibold">Year {year}</span>
                             <span className="font-semibold text-yellow-800">
-                              GPA: 0 | Credits: 0
+                              GPA: {(fullSummary.totalGPA/fullSummary.totalCompleted).toFixed(2)} | Credits: {fullSummary.totalCredits}
                             </span>
                           </div>
                           <div className="space-y-2">
-                            {Object.entries(semesters).map(([sem,summary]) => (
+                            {Object.entries(fullSummary.sems).map(([sem,summary]) => (
                               <div key={sem} className="flex justify-between text-sm">
                                 <span>{sem}</span>
                                 <span className="text-gray-600">
@@ -78,11 +82,11 @@ export default function ResultModal({
                       ))}
                       <div className="flex justify-between font-bold text-lg mt-4 p-2 bg-yellow-50 rounded">
                         <span>Overall GPA:</span>
-                        <span>{0}</span>
+                        <span>{averageGPA}</span>
                       </div>
                       <div className="flex justify-between font-bold text-lg p-2 bg-yellow-50 rounded">
                         <span>Total Credits:</span>
-                        <span>{0}</span>
+                        <span>{credits}</span>
                       </div>
                     </div>
                   </div>
@@ -97,8 +101,7 @@ export default function ResultModal({
                       <div>
                         <h4 className="font-semibold mb-2">Result Review:</h4>
                         <p>
-                          You are meeting the minimum requirements and performing well. Keep up the good
-                          work!
+                          {resultReview(averageGPA)}
                         </p>
                       </div>
                       <div className="bg-yellow-50 p-4 rounded-lg">
@@ -125,3 +128,9 @@ export default function ResultModal({
   )
 }
 
+  const resultReview = (gpa: number) => {
+    if (gpa >= 3.7) return "Excellent performance! Keep up the great work!"
+    if (gpa >= 3.0) return "Good job! You're doing well, but there's room for improvement."
+    if (gpa >= 2.0) return "You're meeting the minimum requirements, but consider seeking additional support to improve your grades."
+    return "Your current GPA is below the minimum requirement. Please seek academic advice as soon as possible."
+  }
