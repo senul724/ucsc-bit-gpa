@@ -1,6 +1,6 @@
 "use client"
 
-import { FullResultSummary } from '@/app/page'
+import { FullResultSummary } from '@/app/(web)/page'
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
 import { FaTimes } from 'react-icons/fa'
@@ -12,12 +12,8 @@ export default function ResultModal({
 }: {
   isModalOpen: boolean
   closeModal: () => void
-  gpaSummary: FullResultSummary|null
+  gpaSummary: FullResultSummary
 }) {
-  if(!gpaSummary){
-    return <></>
-  }
-
   const { semsEntered, credits, gpa, summary} = gpaSummary
   const averageGPA = Number((gpa/semsEntered).toFixed(2))
 
