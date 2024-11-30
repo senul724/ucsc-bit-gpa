@@ -149,7 +149,9 @@ export default function Component() {
           </button>
         </Form>
       </Formik>
+      {result && isModalOpen &&
       <ResultModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} gpaSummary={result} />
+      }
     </>
   )
 }
