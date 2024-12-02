@@ -159,7 +159,7 @@ export default function Component() {
         </motion.div>
 
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-8 text-purple-600">{"Don&apos;t Miss This Opportunity!"}</h2>
+          <h2 className="text-3xl font-bold mb-8 text-purple-600">Don't Miss This Opportunity!</h2>
           <motion.div
             className="inline-block"
             whileHover={{ scale: 1.05 }}

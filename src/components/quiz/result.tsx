@@ -2,15 +2,22 @@
 
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { FaCheckCircle, FaEnvelope, FaGraduationCap, FaPhone, FaRedo, FaStar, FaTrophy } from 'react-icons/fa';
 import { PiConfettiDuotone } from 'react-icons/pi';
 import { TiTicket } from 'react-icons/ti';
 
-export default function QuizResult({ score, totalQuestions }: { score: number; totalQuestions: number }) {
+export default function QuizResult({
+  score, totalQuestions, email, name, setEmail
+}:
+  {
+    score: number; totalQuestions: number; email: string; name: string; setEmail: Dispatch<SetStateAction<string>>;
+  }
+) {
   const [showEmailForm, setShowEmailForm] = useState(true)
   const [showPhoneForm, setShowPhoneForm] = useState(false)
   const [registrationComplete, setRegistrationComplete] = useState(false)
+  const [mobile, setMobile] = useState('')
 
   const handleEmailSubmit = (e: React.FormEvent) => {
     setShowEmailForm(false)
@@ -111,15 +118,17 @@ export default function QuizResult({ score, totalQuestions }: { score: number; t
                 <form onSubmit={handleEmailSubmit} className="mt-4">
                   <div className="flex items-center justify-center text-2xl text-yellow-600 mb-4 drop-shadow-xl font-semibold">
                     <TiTicket className="mr-2" />
-                    <span>You have earned {score} ticket{score > 1 ? 's' : ''}!</span>
+                    <span>You have earned {score} ticket{score > 1 ? 's' : ''} {name}!</span>
                     <TiTicket className="ml-2" />
                   </div>
-                  <p className="text-lg text-purple-700 mb-2">Receive your tickets via email:</p>
+                  <p className="text-lg text-purple-700 mb-4">Receive your tickets via email<br />Is this email correct?</p>
                   <div className="flex flex-col items-center justify-center space-y-2">
                     <input
                       type="email"
                       placeholder="Enter your email"
                       className="w-full max-w-md px-4 py-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                     <button
@@ -145,6 +154,8 @@ export default function QuizResult({ score, totalQuestions }: { score: number; t
                       type="tel"
                       placeholder="Enter your phone number"
                       className="w-full max-w-md px-4 py-2 border border-purple-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      value={mobile}
+                      onChange={(e) => setMobile(e.target.value)}
                       required
                     />
                     <button
@@ -187,11 +198,11 @@ export default function QuizResult({ score, totalQuestions }: { score: number; t
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <a href="mailto:info@example.com" className="flex items-center justify-center text-purple-600 hover:text-purple-800 transition-colors duration-200 group">
               <FaEnvelope className="mr-2 group-hover:animate-bounce" />
-              info@example.com
+              matrix@example.com
             </a>
             <a href="tel:+15551234567" className="flex items-center justify-center text-purple-600 hover:text-purple-800 transition-colors duration-200 group">
               <FaPhone className="mr-2 group-hover:animate-bounce" />
-              +1 (555) 123-4567
+              +94 70 102 4594
             </a>
           </div>
         </motion.div>

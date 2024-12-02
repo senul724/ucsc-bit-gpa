@@ -82,7 +82,7 @@ export default function StartPage() {
               </div>
             </div>
           ) : (
-            <QuizResult totalQuestions={questions.length} score={score} />
+            <QuizResult totalQuestions={questions.length} score={score} setEmail={setEmail} name={name} email={email} />
           )}
         </>
         )}
