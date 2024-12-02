@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import { FaGift, FaCalendarAlt, FaTrophy, FaArrowRight, FaCheckCircle, FaLaptopCode, FaUsers, FaRocket } from 'react-icons/fa'
+import { FaCalendarAlt, FaTrophy, FaArrowRight, FaCheckCircle, FaLaptopCode, FaRocket } from 'react-icons/fa'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -10,7 +10,7 @@ export default function Component() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-purple-50">
       <div className="container mx-auto px-4 py-12">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -29,7 +29,7 @@ export default function Component() {
             <FaCalendarAlt className="text-3xl text-purple-600" />
             <span className="text-2xl font-semibold text-gray-800">January 5th, 2024</span>
           </div>
-          <motion.div 
+          <motion.div
             className="inline-block"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -47,7 +47,7 @@ export default function Component() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="bg-white rounded-2xl shadow-xl p-8 mb-16"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -95,7 +95,7 @@ export default function Component() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-          <motion.div 
+          <motion.div
             className="bg-white rounded-xl shadow-lg p-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -111,7 +111,7 @@ export default function Component() {
             </ol>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="bg-white rounded-xl shadow-lg p-8"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -138,7 +138,7 @@ export default function Component() {
           </motion.div>
         </div>
 
-        <motion.div 
+        <motion.div
           className="relative mb-16 rounded-2xl overflow-hidden shadow-2xl"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -159,8 +159,8 @@ export default function Component() {
         </motion.div>
 
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-8 text-purple-600">Don't Miss This Opportunity!</h2>
-          <motion.div 
+          <h2 className="text-3xl font-bold mb-8 text-purple-600">{"Don&apos;t Miss This Opportunity!"}</h2>
+          <motion.div
             className="inline-block"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

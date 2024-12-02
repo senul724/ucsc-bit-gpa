@@ -1,3 +1,5 @@
+import { Grade, NonGPAGrade } from "./grades";
+
 type Subject = {
   code: string;
   name: string;
@@ -49,7 +51,7 @@ export const subjects: Record<string, Semesters> = {
       { code: "IT5506", name: "e-Business Technologies", credits: 3, isGPA: true }
     ],
     sem6: [
-      { code: "EN6106", name: "Advanced Concepts in\nInformation Technology", credits: 2, isGPA: false },
+      { code: "EN6106", name: "Advanced Concepts in\nInfor  mation Technology", credits: 2, isGPA: false },
       { code: "IT6206", name: "Software Quality\nAssurance", credits: 3, isGPA: true },
       { code: "IT6306", name: "Application Development\nfor Mobile Environments", credits: 4, isGPA: true },
       { code: "IT6406", name: "Network Security and\nAudit", credits: 3, isGPA: true },
@@ -59,7 +61,7 @@ export const subjects: Record<string, Semesters> = {
   }
 }
 
-export const initialValues = {
+export const initialValues:Record<string, Record<string, Grade|NonGPAGrade>> = {
   sem1: {
     'EN1106': 'Did Not Sit',
     'IT1106': 'Did Not Sit',

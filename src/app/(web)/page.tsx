@@ -19,9 +19,9 @@ export type ResultSummary = {
 
 export type FullResultSummary = {
   summary: ResultSummary,
-      credits:number,
-      semsEntered:number;
-      gpa:number;
+  credits: number,
+  semsEntered: number;
+  gpa: number;
 }
 
 export default function Component() {
@@ -31,10 +31,10 @@ export default function Component() {
 
   const onSubmit = (values: InitialValues) => {
     try {
-      let val: ResultSummary = {};
-      let semsEntered = 0 
-      let finalGPA = 0 
-      let credits = 0 
+      const val: ResultSummary = {};
+      let semsEntered = 0
+      let finalGPA = 0
+      let credits = 0
 
       {
         // to get the semesters entered by the user
@@ -70,9 +70,9 @@ export default function Component() {
           }
         })
         setResult({
-          summary:val,
-          gpa:finalGPA,
-          credits, 
+          summary: val,
+          gpa: finalGPA,
+          credits,
           semsEntered
         })
       }
@@ -150,7 +150,7 @@ export default function Component() {
         </Form>
       </Formik>
       {result && isModalOpen &&
-      <ResultModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} gpaSummary={result} />
+        <ResultModal isModalOpen={isModalOpen} closeModal={() => setIsModalOpen(false)} gpaSummary={result} />
       }
     </>
   )
